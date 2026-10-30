@@ -22,10 +22,15 @@ jobs:
       - name: Fuggosegek telepitese
         run: npm install
 
+      - name: Ideiglenes web mappa letrehozasa
+        run: |
+          mkdir www
+          cp -r * www/ 2>/dev/null || true
+
       - name: Android kornyezet elokeszitese (Capacitor)
         run: |
           npm install @capacitor/core @capacitor/cli
-          npx cap init StykAnimate com.filippocalippo.stykanimate --web-dir=.
+          npx cap init StykAnimate com.filippocalippo.stykanimate --web-dir=www
           npm install @capacitor/android
           npx cap add android
           npx cap sync
