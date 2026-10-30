@@ -1,4 +1,5 @@
 name: Webes App APK Generalas
+
 on: [push, workflow_dispatch]
 
 jobs:
@@ -17,15 +18,16 @@ jobs:
         uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
-          java-version: '17'
+          java-version: '21'
 
       - name: Fuggosegek telepitese
         run: npm install
 
-      - name: Ideiglenes web mappa letrehozasa
+      - name: Ideiglenes web mappa letrehozasa (Javitott)
         run: |
           mkdir www
-          cp -r * www/ 2>/dev/null || true
+          # Az rsync segítségével átmásoljuk a fájlokat, de kizárjuk a felesleges mappákat
+          rsync -av --exclude='node_modules' --exclude='android' --exclude='www' --exclude='.git' ./ www/
 
       - name: Android kornyezet elokeszitese (Capacitor)
         run: |
