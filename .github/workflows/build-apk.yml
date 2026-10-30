@@ -19,15 +19,13 @@ jobs:
           distribution: 'zulu'
           java-version: '17'
 
-      - name: Fuggosegek telepitese es Webes build
-        run: |
-          npm install
-          npm run build --if-present
+      - name: Fuggosegek telepitese
+        run: npm install
 
       - name: Android kornyezet elokeszitese (Capacitor)
         run: |
           npm install @capacitor/core @capacitor/cli
-          npx cap init StykAnimate com.filippocalippo.stykanimate --web-dir=dist --dist
+          npx cap init StykAnimate com.filippocalippo.stykanimate --web-dir=.
           npm install @capacitor/android
           npx cap add android
           npx cap sync
